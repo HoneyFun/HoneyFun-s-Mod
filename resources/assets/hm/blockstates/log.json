@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "variant=ice": {
+            "model": "hm:log_ice"
+        },
+
+        "variant=silver": {
+            "model": "hm:log_silver"
+        }
+    }
+}

@@ -1,0 +1,56 @@
+//Items
+item.opal.name=Opal
+item.fiery_opal.name=Fiery Opal
+item.ender_opal.name=Ender Opal
+item.icy_opal.name=Icy Opal
+item.tomato_soup.name=Tomato Soup
+item.compressed_obsidian.name=Compressed Obsidian
+item.obsidian_axe.name=Obsidian Axe
+item.obsidian_boots.name=Obsidian Boots
+item.obsidian_chestplate.name=Obsidian Chestplate
+item.obsidian_helmet.name=Obsidian Helmet
+item.obsidian_hoe.name=Obsidian Hoe
+item.obsidian_leggings.name=Obsidian Leggings
+item.obsidian_pickaxe.name=Obsidian Pickaxe
+item.obsidian_shovel.name=Obsidian Shovel
+item.obsidian_sword.name=Obsidian Sword
+item.silver_ingot.name=Silver Ingot
+item.silicon_rod.name=Silicon Rod
+item.tomato.name=Tomato
+//Blocks
+tile.opal_block.name=Block of Opal
+tile.opal_ore.name=Opal Ore
+tile.ice_portal.name=Ice Portal
+tile.ender_opal_ore.name=Ender Opal Ore
+tile.fiery_opal_ore.name=Fiery Opal Ore
+tile.fiery_opal_block.name=Block of Fiery Opal
+tile.ender_opal_block.name=Block of Ender Opal
+tile.tomato_plant.name=Tomato Plant
+tile.exploding_ore.name=Exploding Ore
+tile.icy_opal_ore.name=Icy Opal Ore
+tile.icy_opal_block.name=Block of Icy Opal
+tile.silver_ore.name=Silver Ore
+tile.fluorescent_lamp.name=Fluorescent Lamp
+tile.silicon_ore.name=Silicon Ore
+tile.led.name=LED
+tile.lit_led=Lit LED
+tile.lit_fluorescent_lamp.name=Lit Fluorescent Lamp
+tile.backtracker.name=Backtracker
+tile.planks_ice_planks.name=Ice Planks
+tile.planks_silver_planks.name=Silver Planks
+tile.log_ice.name=Icy Wood
+tile.log_silver.name=Silvery Wood
+//World Types
+generator.GrassySheets=Ice age
+//Creative Tabs
+itemGroup.honeyfuntab_items=HoneyFun Mods Items
+itemGroup.honeyfuntab_blocks=HoneyFun Mods Blocks
+itemGroup.honeyfuntab_tools_weapons=HoneyFun Mods Tools and Weapons
+//Advancements
+advancements.hfmods.root.title=HoneyFun Mods
+advancements.hfmods.root.description=Obtain a hard, black pickaxe, aka the obsidian pickaxe
+advancements.hfmods.ice.title=There should be jackets in Minecraft
+advancements.hfmods.ice.description=Reach the ice age - and discover the surprise
+//Other stuff
+tile.backtracker.inOverworld=You may not use the backtracker right now, you are already in the Overworld
+command.notEnoughArgs=§4There are not enough arguments to run the command

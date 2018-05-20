@@ -1,0 +1,14 @@
+{
+
+    "variants": {
+    
+        "compressing=false,facing=north": {"model": "hm:compresser"},
+        "compressing=false,facing=east": {"model": "hm:compresser, "y": 90},
+        "compressing=false,facing=south": {"model": "hm:compresser", "y": 180},
+        "compressing=false,facing=west": {"model": "hm:compresser", "y": 270},
+        "compressing=true,facing=north": {"model": "hm:compressing_compresser"},
+        "compressing=true,facing=east": {"model": "hm:compressing_compresser", "y": 90},
+        "compressing=true,facing=south": {"model": "hm:compressing_compresser", "y": 180},
+        "compressing=true,facing=west": {"model": "hm:compressing_compresser", "y": 270},
+    }
+}

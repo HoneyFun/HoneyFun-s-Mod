@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "variant=ice_planks": {
+            "model": "hm:planks_ice_planks"
+        },
+
+        "variant=silver_planks": {
+            "model": "hm:planks_silver_planks"
+        }
+    }
+}

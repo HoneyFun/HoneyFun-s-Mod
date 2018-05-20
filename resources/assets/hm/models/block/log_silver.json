@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/cube_column",
+    "textures": {
+        "end": "hm:blocks/log_silver_top",
+        "side": "hm:blocks/log_silver_side"
+    }
+}

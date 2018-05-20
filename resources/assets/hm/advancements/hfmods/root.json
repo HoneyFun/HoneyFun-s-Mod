@@ -1,0 +1,32 @@
+{
+    "display": {
+        "icon": {
+            "item": "hm:obsidian_pickaxe"
+        },
+
+        "title": {
+            "translate": "advancements.hfmods.root.title"
+        },
+
+        "description": {
+            "translate": "advancements.hfmods.root.description"
+        },
+
+        "background": "hm:HFMods.png",
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+
+    "criteria": {
+        "obsidian_pickaxe": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "hm:obsidian_pickaxe"
+                    }
+                ]
+            }
+        }
+    }
+}

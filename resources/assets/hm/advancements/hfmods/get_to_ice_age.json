@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:packed_ice"
+        },
+
+        "title": {
+            "translate": "advancements.hfmods.ice.title"
+        },
+
+        "description": {
+            "translate": "advancements.hfmods.ice.description"
+        },
+
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+
+    "parent": "hm:hmmods/root",
+    "criteria": {
+        "entered_ice_age": {
+            "trigger": "minecraft:changed_dimension",
+            "conditions": {
+                "to": "Ice_age"
+            }
+        }
+    }
+}
