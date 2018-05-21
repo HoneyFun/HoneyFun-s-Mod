@@ -1,0 +1,11 @@
+{
+  "homepage": "https://honeyfun.itch.io/honeyfun-mods",
+  "promos": {
+    "1.12-latest": "1.2b1",
+    "1.12-recommended": "1.1"
+  },
+  "1.12": {
+    "1.2b1": "Added new dimension, structures, and more. Made obsidian armor more powerful. Added icy versions of opals. Removed changed TP command. Added a backtracker, which you can use to get back to the overworld.",
+    "1.1": "Adds some stuff that I forgot."
+  }
+}
