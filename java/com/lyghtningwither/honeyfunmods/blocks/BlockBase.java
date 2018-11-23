@@ -3,7 +3,7 @@ package com.lyghtningwither.honeyfunmods.blocks;
 import com.lyghtningwither.honeyfunmods.Main;
 import com.lyghtningwither.honeyfunmods.init.ModBlocks;
 import com.lyghtningwither.honeyfunmods.init.ModItems;
-import com.lyghtningwither.honeyfunmods.util.IHasModel;
+import com.lyghtningwither.honeyfunmods.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,13 +21,17 @@ public class BlockBase extends Block implements IHasModel {
 		setCreativeTab(Main.honeyfuntab_blocks);
 		
 		ModBlocks.BLOCKS.add(this);
-		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		if(isItem()) ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
 	@Override
 	public void registerModels() {
-		// TODO Auto-generated method stub
 		
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
+	
+	public boolean isItem() {
+		
+		return true;
 	}
 }

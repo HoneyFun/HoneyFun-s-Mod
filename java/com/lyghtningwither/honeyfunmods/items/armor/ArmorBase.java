@@ -2,7 +2,7 @@ package com.lyghtningwither.honeyfunmods.items.armor;
 
 import com.lyghtningwither.honeyfunmods.Main;
 import com.lyghtningwither.honeyfunmods.init.ModItems;
-import com.lyghtningwither.honeyfunmods.util.IHasModel;
+import com.lyghtningwither.honeyfunmods.util.interfaces.IHasModel;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -22,7 +22,6 @@ public class ArmorBase extends ItemArmor implements IHasModel {
 	
 	@Override
 	public void registerModels() {
-		// TODO Auto-generated method stub
 		
 		Main.proxy.registerItemRenderer(this, 0, "inventory");
 	}

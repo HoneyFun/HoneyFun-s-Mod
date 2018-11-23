@@ -4,9 +4,9 @@ import com.lyghtningwither.honeyfunmods.Main;
 import com.lyghtningwither.honeyfunmods.init.ModBlocks;
 import com.lyghtningwither.honeyfunmods.init.ModItems;
 import com.lyghtningwither.honeyfunmods.items.ItemBlockVariants;
-import com.lyghtningwither.honeyfunmods.util.IHasMetaName;
-import com.lyghtningwither.honeyfunmods.util.IHasModel;
 import com.lyghtningwither.honeyfunmods.util.handlers.EnumHandler;
+import com.lyghtningwither.honeyfunmods.util.interfaces.IHasMetaName;
+import com.lyghtningwither.honeyfunmods.util.interfaces.IHasModel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockWood extends Block implements IHasModel, IHasMetaName {
@@ -48,6 +49,12 @@ public class BlockWood extends Block implements IHasModel, IHasMetaName {
 	public int damageDropped(IBlockState state) {
 		
 		return ((EnumHandler.WoodVariants)state.getValue(VARIANT)).getMeta();
+	}
+	
+	@Override
+	public boolean isWood(IBlockAccess world, BlockPos pos) {
+		
+		return true;
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import com.lyghtningwither.honeyfunmods.Main;
 import com.lyghtningwither.honeyfunmods.commands.CommandDimensionTeleport;
 import com.lyghtningwither.honeyfunmods.commands.util.Teleport;
 import com.lyghtningwither.honeyfunmods.init.ModBlocks;
+import com.lyghtningwither.honeyfunmods.util.handlers.SoundHandler;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,8 +17,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -37,14 +40,16 @@ public class BlockBacktracker extends BlockBase {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
-		if(worldIn.isRemote) {
+		if(!worldIn.isRemote) {
 			
 			if(playerIn.dimension == 0) {
 				
 				playerIn.sendStatusMessage(new TextComponentTranslation("tile.backtracker.inOverworld", new Object[0]), true);
 			} else {
 				
-				Teleport.TeleportToDimension(playerIn, 0, pos.getX(), pos.getY(), pos.getZ());
+				playerIn.dimension = 0;
+				MinecraftServer server = worldIn.getMinecraftServer();
+				server.getWorld(0).playSound(pos.getX(), pos.getY(), pos.getZ(), SoundHandler.portal, SoundCategory.BLOCKS, 100, 100, true);
 			}
 		}
 		

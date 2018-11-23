@@ -35,16 +35,16 @@ public class Teleport extends Teleporter {
 	public static void TeleportToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
 		
 		int outDimension = player.getEntityWorld().provider.getDimension();
-		EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
+		EntityPlayer entityPlayerMP = player;
 		MinecraftServer server = player.getEntityWorld().getMinecraftServer();
 		WorldServer worldServer = server.getWorld(dimension);
 		
 		if(worldServer == null || server == null) {
 			
-			throw new IllegalArgumentException("Dimension: " + dimension + " doesn't exist!");
+			throw new IllegalArgumentException("Dimension " + dimension + " doesn't exist!");
 		}
 		
-		worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(entityPlayerMP, dimension, new Teleport(worldServer, x, y, z));
+		entityPlayerMP.changeDimension(dimension, new Teleport(worldServer, x, y, z));
 		player.setPositionAndUpdate(x, y, z);
 	}
 }

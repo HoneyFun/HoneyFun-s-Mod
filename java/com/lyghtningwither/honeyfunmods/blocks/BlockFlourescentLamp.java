@@ -7,41 +7,41 @@ import com.lyghtningwither.honeyfunmods.init.ModBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockFlourescentLamp extends BlockBase
 {
-    private final boolean isOn;
+    public static final PropertyBool IS_ON = PropertyBool.create("on");
+    
+    private boolean isOn;
 
-    public BlockFlourescentLamp(boolean isOn, String name, Material material, boolean isInCreativeInventory) {
+    public BlockFlourescentLamp(String name, Material material) {
     	
         super(name, material);
-        this.isOn = isOn;
         this.setHardness(3);
         this.setResistance(5);
         this.setHarvestLevel("pickaxe", 2);
-        
-        if (isOn) {
-        	
-            this.setLightLevel(1.0F);
-        }
-        
-        if(isInCreativeInventory) {
-        	
-        	this.setCreativeTab(Main.honeyfuntab_blocks);
-        }
+        this.setDefaultState(this.getDefaultState().withProperty(IS_ON, false));
+        setCreativeTab(Main.honeyfuntab_blocks);
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
     	
     	return false;
+    }
+    
+    @Override
+    protected BlockStateContainer createBlockState() {
+    	
+    	return new BlockStateContainer(this, IS_ON);
     }
     
     /**
@@ -51,13 +51,15 @@ public class BlockFlourescentLamp extends BlockBase
     {
         if (!worldIn.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (!worldIn.isBlockPowered(pos))
             {
                 worldIn.setBlockState(pos, ModBlocks.FLOURESCENT_LAMP.getDefaultState(), 2);
+                this.isOn = false;
             }
-            else if (!this.isOn && worldIn.isBlockPowered(pos))
+            else if (worldIn.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, ModBlocks.LIT_FLOURESCENT_LAMP.getDefaultState(), 2);
+                worldIn.setBlockState(pos, ModBlocks.FLOURESCENT_LAMP.getDefaultState().withProperty(IS_ON, true), 2);
+                this.isOn = true;
             }
         }
     }
@@ -71,13 +73,15 @@ public class BlockFlourescentLamp extends BlockBase
     {
         if (!worldIn.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (!worldIn.isBlockPowered(pos))
             {
-                worldIn.scheduleUpdate(pos, this, 4);
+                worldIn.setBlockState(pos, ModBlocks.FLOURESCENT_LAMP.getDefaultState(), 2);
+                this.isOn = false;
             }
-            else if (!this.isOn && worldIn.isBlockPowered(pos))
+            else if (worldIn.isBlockPowered(pos))
             {
-                worldIn.setBlockState(pos, ModBlocks.LIT_FLOURESCENT_LAMP.getDefaultState(), 2);
+                worldIn.setBlockState(pos, ModBlocks.FLOURESCENT_LAMP.getDefaultState().withProperty(IS_ON, true), 2);
+                this.isOn = true;
             }
         }
     }
@@ -86,9 +90,10 @@ public class BlockFlourescentLamp extends BlockBase
     {
         if (!worldIn.isRemote)
         {
-            if (this.isOn && !worldIn.isBlockPowered(pos))
+            if (!worldIn.isBlockPowered(pos))
             {
                 worldIn.setBlockState(pos, ModBlocks.FLOURESCENT_LAMP.getDefaultState(), 2);
+                this.isOn = false;
             }
         }
     }
@@ -109,5 +114,22 @@ public class BlockFlourescentLamp extends BlockBase
     protected ItemStack getSilkTouchDrop(IBlockState state)
     {
         return new ItemStack(ModBlocks.FLOURESCENT_LAMP);
+    }
+    
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+    	
+    	return this.getDefaultState().withProperty(IS_ON, isOn);
+    }
+    
+    @Override
+    public int getMetaFromState(IBlockState state) {
+    	
+    	int ioi;
+    	
+    	if(state.getValue(IS_ON)) ioi = 1;
+    	else ioi = 0;
+    	
+    	return ioi;
     }
 }

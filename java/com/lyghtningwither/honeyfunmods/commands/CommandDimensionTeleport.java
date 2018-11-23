@@ -42,6 +42,7 @@ public class CommandDimensionTeleport extends CommandBase {
 		
 		return 2;
 	}
+	
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		
@@ -65,7 +66,7 @@ public class CommandDimensionTeleport extends CommandBase {
 		
 		if(sender instanceof EntityPlayer) {
 			
-			Teleport.TeleportToDimension((EntityPlayer) sender, dimensionId, (double) sender.getPosition().getX(), (double) sender.getPosition().getX(), (double) sender.getPosition().getX());
+			Teleport.TeleportToDimension((EntityPlayer) sender, dimensionId, (double) sender.getPosition().getX(), (double) sender.getPosition().getY(), (double) sender.getPosition().getX());
 		}
 	}
 }

@@ -8,7 +8,9 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.common.DimensionManager;
 
 public class Explosion extends CommandBase {
 
@@ -21,7 +23,7 @@ public class Explosion extends CommandBase {
 	@Override
 	public String getUsage(ICommandSender sender) {
 		
-		return "/explosion <x> <y> <z> <radius> [dimension ID]";
+		return "/explosion <x> <y> <z> <radius> [dimension ID, default Overworld]";
 	}
 
 	@Override
@@ -35,68 +37,138 @@ public class Explosion extends CommandBase {
 		
 		if (args.length < 4) return;
 		
-		int x = 0;
-		int y = 0;
-		int z = 0;
-		int radius = 0;
-		int dimensionId = 0;
-		
-		try {
+		if(args.length == 4) {
 			
-			x = Integer.parseInt(args[0]);
-		} catch (NumberFormatException e) {
-			
-			sender.sendMessage(new TextComponentString(TextFormatting.RED + "X cooirdinate invalid."));
-			return;
-		}
-		
-		try {
-			
-			y = Integer.parseInt(args[1]);
-		} catch (NumberFormatException e) {
-			
-			sender.sendMessage(new TextComponentString(TextFormatting.RED + "Y cooirdinate invalid."));
-			return;
-		}
-		
-		try {
-			
-			z = Integer.parseInt(args[2]);
-		} catch (NumberFormatException e) {
-			
-			sender.sendMessage(new TextComponentString(TextFormatting.RED + "Z cooidinate invalid."));
-			return;
-		}
-		
-		try {
-			
-			radius = Integer.parseInt(args[3]);
-		} catch (NumberFormatException e) {
-			
-			sender.sendMessage(new TextComponentString(TextFormatting.RED + "Radius invalid."));
-			return;
-		}
-		
-		if(args[4] != "") {
+			int x = 0;
+			int y = 0;
+			int z = 0;
+			int radius = 0;
 			
 			try {
 				
-				dimensionId = Integer.parseInt(args[4]);
+				x = Integer.parseInt(args[0]);
 			} catch (NumberFormatException e) {
 				
-				sender.sendMessage(new TextComponentString(TextFormatting.RED + "Dimension ID invalid."));
+				if(args[0] == "~") x = sender.getPosition().getX();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[0]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				y = Integer.parseInt(args[1]);
+			} catch (NumberFormatException e) {
+				
+				if(args[1] == "~") y = sender.getPosition().getY();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[1]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				z = Integer.parseInt(args[2]);
+			} catch (NumberFormatException e) {
+				
+				if(args[2] == "~") z = sender.getPosition().getZ();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[2]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				radius = Integer.parseInt(args[3]);
+			} catch (NumberFormatException e) {
+				
+				sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[3]}));
 				return;
 			}
-		}
-		
-		if(args[4] != "") {
-			
-			server.getWorld(dimensionId).createExplosion(null, x, y, z, radius, false);
-			sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Explosion created."));
-		} else {
 			
 			server.getWorld(0).createExplosion(null, x, y, z, radius, false);
-			sender.sendMessage(new TextComponentString(TextFormatting.GREEN + "Explosion created."));
+			
+			sender.sendMessage(new TextComponentTranslation("command.explosion.success", new Object[0]));
+		} else if (args.length >= 5) {
+			
+			int x = 0;
+			int y = 0;
+			int z = 0;
+			int radius = 0;
+			int dimensionID = 0;
+			
+			try {
+				
+				x = Integer.parseInt(args[0]);
+			} catch (NumberFormatException e) {
+				
+				if(args[0] == "~") x = sender.getPosition().getX();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[0]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				y = Integer.parseInt(args[1]);
+			} catch (NumberFormatException e) {
+				
+				if(args[1] == "~") y = sender.getPosition().getY();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[1]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				z = Integer.parseInt(args[2]);
+			} catch (NumberFormatException e) {
+				
+				if(args[2] == "~") z = sender.getPosition().getX();
+				else {
+					
+					sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[2]}));
+					return;
+				}
+			}
+			
+			try {
+				
+				radius = Integer.parseInt(args[3]);
+			} catch (NumberFormatException e) {
+				
+				sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[3]}));
+				return;
+			}
+			
+			try {
+				
+				dimensionID = Integer.parseInt(args[4]);
+			} catch (NumberFormatException e) {
+				
+				sender.sendMessage(new TextComponentTranslation("command.numberFormattingException", new Object[] {args[4]}));
+				return;
+			}
+			
+			if(!DimensionManager.isDimensionRegistered(dimensionID)) {
+				
+				sender.sendMessage(new TextComponentTranslation("command.explosion.invalidDimensionID", new Object[] {args[5]}));
+				return;
+			}
+			
+			server.getWorld(dimensionID).createExplosion(null, x, y, z, radius, false);
+			
+			sender.sendMessage(new TextComponentTranslation("command.explosion.success", new Object[0]));
 		}
 	}
 }
